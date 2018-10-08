@@ -15,7 +15,7 @@ output:
 
 ##Introduction
 
-I am interested in studying best practice approaches for designing and adapting educational spaces within emergency settings, e.g. war zones, refugee camps, natural disasters. Specifically, I study how exposure to such adversities can impact learning and whether pedagogical approaches can mitigate this impact. A common experience amongst populations who are impacted by emergencies is exposure to trauma, and a sequela of trauma is a sense of powerlessness. As such, this article’s focus on how perceptions of power can impact decisions regarding action vs. inaction seem interesting. A line of inquiry in my work is whether empowering adolescents and young adults to bolster their agency in shaping their future can impact their learning and academic performance. How perceptions of power impact individuals’ predilections to act in ambivalent vs. univalent situations can have interesting implications for my population of interest. That is, will students who self-perceive as more powerful be less likely to make decisions regarding their academic effort when they feel ambivalent about the results of that effort? 
+I am interested in studying best practice approaches for designing and adapting educational spaces within emergency settings, e.g. war zones, refugee camps, natural disasters. Specifically, I study how exposure to such adversities can impact learning and whether pedagogical approaches can mitigate this impact. A common experience amongst populations who are impacted by emergencies is exposure to trauma, and a sequela of trauma is a sense of powerlessness. As such, this article’s focus on how perceptions of power can impact decisions regarding action vs. inaction seems interesting. A line of inquiry in my work is whether empowering adolescents and young adults in emergency contexts to bolster their agency in shaping their future can impact their learning and academic performance. How perceptions of power impact individuals’ predilections to act in ambivalent vs. univalent situations can have interesting implications for my population of interest. That is, will students who self-perceive as more powerful be less likely to make decisions regarding their academic effort when they feel ambivalent about the results of that effort? 
 
 I also chose this experiment because I am interested in practicing the methodology that was used to analyze the results. While I have a theoretical understanding of the ANOVA test, I have seldom used it to analyze data firsthand. I hope to potentially use this approach in my own experimental designs in the future and would thus like to practice it using data from this replication study. 
 
@@ -25,6 +25,11 @@ Participants will respond to the ambivalent assessment followed by the power ass
 A pressing challenge will be recruiting participants who reflect the demographics of the original study. The original study did not include any information regarding the background of their participants other than their educational level, i.e. undergraduate students. I would be concerned about making a statement regarding the reproducibility—or lack thereof—of the original study when I don’t know whether my sample matches the original sample. This is especially because there can be disparate perceptions of power depending on gender, ethnicity, and race. A second challenging component will be surrounding the power measure. The first experiment does not include any self-report of power perceptions and assumes a higher power perception solely based on writing about feeling powerful. The second experiment, which is not included in this reproducibility study, inquires about the subjective power state, i.e. feeling powerful or not, through a self-report. This self-report would allow me to confirm whether participants’ results are in fact due to their subjective appraisal of their power as opposed to other confounding issues.  
 
 
+##Link to original paper 
+http://journals.sagepub.com.stanford.idm.oclc.org/doi/pdf/10.1177/0956797616669947
+
+##Link to repository 
+https://github.com/zainabhos/durso2016
 
 ##Methods
 
