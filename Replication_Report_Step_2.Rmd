@@ -1,0 +1,145 @@
+---
+title: "Replication of From Power to Inaction: Ambivalence
+Gives Pause to the Powerful by Durso, Brinol, & Petty (12x, Psychological Science)"
+author: "Zainab Hosseini (zainabh@stanford.edu)"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+---
+
+<!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
+
+##Introduction
+
+I am interested in studying best practice approaches for designing and adapting educational spaces within emergency settings, e.g. war zones, refugee camps, natural disasters. Specifically, I study how exposure to such adversities can impact learning and whether pedagogical approaches can mitigate this impact. A common experience amongst populations who are impacted by emergencies is exposure to trauma, and a sequela of trauma is a sense of powerlessness. As such, this article’s focus on how perceptions of power can impact decisions regarding action vs. inaction seems interesting. A line of inquiry in my work is whether empowering adolescents and young adults in emergency contexts to bolster their agency in shaping their future can impact their learning and academic performance. How perceptions of power impact individuals’ predilections to act in ambivalent vs. univalent situations can have interesting implications for my population of interest. That is, will students who self-perceive as more powerful be less likely to make decisions regarding their academic effort when they feel ambivalent about the results of that effort? 
+
+I also chose this experiment because I am interested in practicing the methodology that was used to analyze the results. While I have a theoretical understanding of the ANOVA test, I have seldom used it to analyze data firsthand. I hope to potentially use this approach in my own experimental designs in the future and would thus like to practice it using data from this replication study. 
+
+To replicate this study, I will have to recruit 120 adults. Participants will randomly be assigned into 4 experimental groups using a 2x2 between-subject factorial design. That is, participants will be divided between an ambivalent vs. univalent x powerful vs. powerless group. Ambivalence vs. not will be measured through providing a case vignette through which Bob, a hypothetical employee, will be described with either all positive/ all negative attributes (univalent) or half positive half negative attributes. Participants will then be asked to choose whether they want to promote Bob. This measure of ambivalence is complemented by a measure of perceived power. Power will be measured by asking participants to respond to an ostensibly random essay question that purposefully inquires about a time they either felt powerful or powerless. This is a widely used measure of current perception of power. 
+Participants will respond to the ambivalent assessment followed by the power assessment. Subsequently, participants will be asked how much they would like to wait before making a decision, and then be prompted to make a decision regarding promoting Bob. As such, procedures include reading a case vignette, writing a short paragraph, and responding to two questions. 
+
+A pressing challenge will be recruiting participants who reflect the demographics of the original study. The original study did not include any information regarding the background of their participants other than their educational level, i.e. undergraduate students. I would be concerned about making a statement regarding the reproducibility—or lack thereof—of the original study when I don’t know whether my sample matches the original sample. This is especially because there can be disparate perceptions of power depending on gender, ethnicity, and race. A second challenging component will be surrounding the power measure. The first experiment does not include any self-report of power perceptions and assumes a higher power perception solely based on writing about feeling powerful. The second experiment, which is not included in this reproducibility study, inquires about the subjective power state, i.e. feeling powerful or not, through a self-report. This self-report would allow me to confirm whether participants’ results are in fact due to their subjective appraisal of their power as opposed to other confounding issues.  
+
+
+##Link to original paper 
+http://journals.sagepub.com.stanford.idm.oclc.org/doi/pdf/10.1177/0956797616669947
+
+##Link to repository 
+https://github.com/zainabhos/durso2016
+
+##Methods
+
+###Power Analysis
+
+Cohen's d = (5.23 - 6.25) ⁄ 2.08 = 0.49 <== original effect size
+The original study notes that they aimed for 120 participants in order to stay within conventions of including 20-40 participants per cell in a 2x2 factorial design. In order to accomplish the effect size they saw, i.e. .49, we need 137 participants for 80%, 178 for 90%, and 220 for 95% power. Because tasts involved are simple, it should be feasible to recruit 200 participants on Mechanical Turk. 
+
+###Planned Sample
+
+I will aim for 200 participants, and I will continue recruiting until that number is reached. Because authors seemed to be recruiting on an ongoing basis they stopped recruitment when they felt all 120 spots would be filled, but this recruitment will occur through a short period of time and will therefore continue until all 200 participants take the surveys. No preselction criteria or demographics indicated other than being an adult. 
+
+###Materials
+
+Prompts will be followed exactly. 
+
+![Material1](/Users/Ikhlas/Desktop/Material1.png)
+![Material2](/Users/Ikhlas/Desktop/Material2.png)
+
+
+
+###Procedure	
+
+Exact procedure will be followed: 
+
+"As a cover story, participants were first informed that
+the study was being conducted with human-resourcesmanagement
+researchers at the Fisher College of Business
+at The Ohio State University. Participants were told that the
+main goal was to understand how people make decisions
+about employees. At this point, participants received information
+that was ostensibly about an actual employee. This
+information differed according to whether they were in the
+ambivalent or in the univalent condition.
+After reading the employee’s profile, participants were
+assigned to the power induction, which involved the most
+commonly used procedure for priming differences in perceived
+power—writing about a previous episode in which
+they had high or low power (Galinsky et al., 2003). Participants
+were then asked to indicate the extent to which they
+would prefer to wait to make a decision about the
+employee (i.e., preference for inaction). Regardless of their
+preference, they were subsequently prompted to make a
+promote-or-not decision (Experiment 1) or a fire-or-not
+decision (Experiment 2) about the employee, and the time
+to make this decision was recorded."
+
+The only difference will be in that participants will only be given the positive attributes of Bob as a univalent case, i.e. experiment 1, 
+insteading of reading both positive and negative attributes. 
+
+###Analysis Plan
+
+1) Data exclusion: participants who fall within 6 SDs of response time will be excluded
+2) Manipulation checks will be conducted to ensure that ambivalence and power are each measured only by their respective tests. This will be conducted through a 2x2 ANOVA to see whether factors other intended variables can predict differences. 
+3) Multivariate analysis of inaction: responses will be put into a 2x2 ANOVA to assess main effects and interactions effects of employee profile and power state 
+4) While not included in original study, I will look into gender as a covariate  
+
+Key analysis of interest will be a 2x2 between-subject factorial design - ANOVA
+
+###Differences from Original Study
+
+There is a 
+Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.
+
+### Methods Addendum (Post Data Collection)
+
+You can comment this section out prior to final report with data collection.
+
+#### Actual Sample
+  Sample size, demographics, data exclusions based on rules spelled out in analysis plan
+
+#### Differences from pre-data collection methods plan
+  Any differences from what was described as the original plan, or “none”.
+
+
+##Results
+
+
+### Data preparation
+
+Data preparation following the analysis plan.
+	
+```{r include=F}
+###Data Preparation
+
+####Load Relevant Libraries and Functions
+
+####Import data
+
+#### Data exclusion / filtering
+
+#### Prepare data for analysis - create columns etc.
+```
+
+### Confirmatory analysis
+
+The analyses as specified in the analysis plan.  
+
+*Side-by-side graph with original graph is ideal here*
+
+###Exploratory analyses
+
+Any follow-up analyses desired (not required).  
+
+## Discussion
+
+### Summary of Replication Attempt
+
+Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
+
+### Commentary
+
+Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
