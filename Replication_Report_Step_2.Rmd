@@ -91,8 +91,11 @@ Key analysis of interest will be a 2x2 between-subject factorial design - ANOVA
 
 ###Differences from Original Study
 
-There is a 
-Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.
+Two noteworthy differences exist: 
+
+1) Participants in original study were recruited on a college campus and participated in study in person. This is in contrast to this replication study which will use an online platform and recruit participants from a variety of educational backgrounds, i.e. not all will be college students. I can include a question on my demographics survey to inquire about educational level, but even then geographic region of college could impact results.
+2) Original study aggregated experiment 1 and 2 results into one design, which means they did not differentiate between negative and positive univalent prompts. I will only be including positive univalent scripts, though I don't think this will impact results because original study did not report significant differences between positive and negative scripts' impact on decision making process. Further, I will not be including self-report power measures as they were only included in experiment 2. 
+
 
 ### Methods Addendum (Post Data Collection)
 
@@ -115,18 +118,33 @@ Data preparation following the analysis plan.
 ```{r include=F}
 ###Data Preparation
 
+*Data will be obtained through a Qualtrics link on Mechanical Turk 
+
 ####Load Relevant Libraries and Functions
-
+Not sure which to use? 
 ####Import data
-
+Will import data from Qualtrics .cvs
 #### Data exclusion / filtering
-
+Per original study, preliminary analysis will be conducted to exclude participants whose response time falls outside of 6 SDs. 
 #### Prepare data for analysis - create columns etc.
+Data cleaning and survey to ensure that missing data is excluded. Convert to wide vs. long format as necessary. Label variables appropriately. 
 ```
 
 ### Confirmatory analysis
 
-The analyses as specified in the analysis plan.  
+1) Data exclusion - histograms, or create categorical variables with folks who score above and beyond a the +\-6 point. 
+2) Manipulation checks - Two way factorial design to assess whether variables other than intended one is responsible for differences, i.e. did reading ambivalent vs. univalent profiles determine ambivalence level or did other variable such as power impact it as well? This is to ensure that participants reading ambivalent scenarios are in fact becoming more ambivalent(?). 
+
+```{r}
+fit <- aov(y ~ A + B + A:B, data=mydataframe)
+fit <- aov(y ~ A*B, data=mydataframe) # same thing 
+```
+3) Multivariate analysis of inaction - Two way factorial design to assess main effect of employee profile and significant interactions with power state 
+
+```{r}
+fit <- aov(y ~ A + B + A:B, data=mydataframe)
+fit <- aov(y ~ A*B, data=mydataframe) # same thing 
+```
 
 *Side-by-side graph with original graph is ideal here*
 
