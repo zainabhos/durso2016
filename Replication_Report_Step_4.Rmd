@@ -35,20 +35,20 @@ https://github.com/zainabhos/durso2016
 
 ###Power Analysis
 
-Cohen's d = (5.23 - 6.25) ⁄ 2.08 = 0.49 <== original effect size
-The original study notes that they aimed for 120 participants in order to stay within conventions of including 20-40 participants per cell in a 2x2 factorial design. In order to accomplish the effect size they saw, i.e. .49, we need 137 participants for 80%, 178 for 90%, and 220 for 95% power. Because tasts involved are simple, it should be feasible to recruit 200 participants on Mechanical Turk. 
+The effect size for this study was calculated using the G*Power software. Because the original study used a MANOVA, the effect size was determined by taking the Pillai V value and determining the effect size ==> .0358
+
+The original study notes that they aimed for 120 participants in order to stay within conventions of including 20-40 participants per cell in a 2x2 factorial design. In order to accomplish the effect size they saw, i.e. .0358, we need 274 participants for 80%, 358 for 90%, and 496 for 95% power. However, due to logistical limitations, this study will aim to recruit the original number of participants who took the study.
 
 ###Planned Sample
 
-I will aim for 200 participants, and I will continue recruiting until that number is reached. Because authors seemed to be recruiting on an ongoing basis they stopped recruitment when they felt all 120 spots would be filled, but this recruitment will occur through a short period of time and will therefore continue until all 200 participants take the surveys. No preselction criteria or demographics indicated other than being an adult. 
+I will aim for 126 participants, and I will continue recruiting until that number is reached. Because authors seemed to be recruiting on an ongoing basis they stopped recruitment when they felt all 120 spots would be filled, but this recruitment will occur through a short period of time and will therefore continue until all 126 participants take the surveys. No preselction criteria or demographics indicated other than being an adult. However, in order to account for the difference sources in sampling, i.e. college campus in original study vs. Mturk in my study, I will incorporate a demographic variable to explore whether this poses a difference. 
 
 ###Materials
 
 Prompts will be followed exactly. 
 
-![Material1](/Users/Ikhlas/Desktop/Material1.png)
-![Material2](/Users/Ikhlas/Desktop/Material2.png)
-
+![Material1](/Users/Ikhlas/Desktop/Psych251/Material1.png)
+![Material2](/Users/Ikhlas/Desktop/Psych251/Material2.png)
 
 
 ###Procedure	
@@ -85,9 +85,9 @@ insteading of reading both positive and negative attributes.
 1) Data exclusion: participants who fall within 6 SDs of response time will be excluded
 2) Manipulation checks will be conducted to ensure that ambivalence and power are each measured only by their respective tests. This will be conducted through a 2x2 ANOVA to see whether factors other intended variables can predict differences. 
 3) Multivariate analysis of inaction: responses will be put into a 2x2 ANOVA to assess main effects and interactions effects of employee profile and power state 
-4) While not included in original study, I will look into gender as a covariate  
+4) While not included in original study, I will look into education as a covariate  
 
-Key analysis of interest will be a 2x2 between-subject factorial design - ANOVA
+Key analysis of interest will be a 2x2 between-subject factorial design - MANOVA
 
 ###Differences from Original Study
 
@@ -118,48 +118,104 @@ Data preparation following the analysis plan.
 ###Data Preparation
 
 ####Load Relevant Libraries and Functions
+```{r}
 library(tidyverse)
-install.packages("psych")
 library(psych)
 library(dplyr)
 library(heplots)
-#What other libraries helpful here?#
-
-####Import data
-``` {r}
-Pilot1 <- read.csv("/Users/Ikhlas/Downloads/Replication Report 1.csv")
-head(Pilot1)
-
-#How do I only look at the summary stats for one variable?# describe by command? 
-#### Data exclusion / filtering
-
-summary(Pilot1)
-Pilot1New <- Pilot1[ which(Pilot1$Behavioral.Inaction < 16), ] 
-head(Pilot1New)
-
-Prepare data for analysis - create columns etc. - I had to make alterations in excel in order to consolidate the power and ambivalent states. Should I be creating these columns in r by using gather instead of doing it manually in excel? 
+library(stringr)
 ```
 
+####Import data
+```{r}
+PilotB <- read.csv("/Users/Ikhlas/Desktop/Psych251/PilotBData.csv", stringsAsFactors=FALSE)
+PilotB = PilotB[3:nrow(PilotB), ]
+```
+
+```{r}
+
+#### Data exclusion / filtering
+
+##Include only relevant columns 
+Pilot <- subset(PilotB, select = c(Finished, Q15, Q16, Q6, Q10, Q8_Last.Click, Q8_Page.Submit, Q17, Ambivalentvs.Univalent_DO, Highvs.LowPower_DO, Q18, Q21, Q23))
+
+##Include those who finished 
+Pilot<-Pilot[!(Pilot$Finished=="False"),]
+
+
+##Recode NAs
+Pilot[Pilot==-99] <- NA
+
+##Rename Columns 
+names(Pilot)[names(Pilot) == 'Q6'] <- 'Verbal.Inaction'
+names(Pilot)[names(Pilot) == 'Q10'] <- 'Promote.Decision'
+names(Pilot)[names(Pilot) == 'Q8_Page.Submit'] <- 'Behavioral.Inaction'
+names(Pilot)[names(Pilot) == 'Q17'] <- 'Education'
+names(Pilot)[names(Pilot) == 'Ambivalentvs.Univalent_DO'] <- 'Ambivalence.State'
+names(Pilot)[names(Pilot) == 'Highvs.LowPower_DO'] <- 'Power.State'
+names(Pilot)[names(Pilot) == 'Q18'] <- 'MC1'
+names(Pilot)[names(Pilot) == 'Q21'] <- 'MC2'
+names(Pilot)[names(Pilot) == 'Q23'] <- 'MC3'
+
+## Variable cleaning - take the letters out of the variable values and change it to a numeric type
+Pilot$Verbal.Inaction.Num = str_extract(Pilot$Verbal.Inaction, "[0-9]+")
+Pilot$Verbal.Inaction.Num <- as.numeric(Pilot$Verbal.Inaction.Num)
+Pilot$Behavioral.Inaction.Num <- as.numeric(Pilot$Behavioral.Inaction)
+
+
+##Create composite score for ambivalence manipulation check 
+
+Pilot$MC1 <- as.integer(Pilot$MC1)
+Pilot$MC2 <- as.integer(Pilot$MC2)
+Pilot$MC3 <- as.integer(Pilot$MC3)
+Pilot$Subjective.Ambivalence<-rowMeans(Pilot[, c('MC1','MC2','MC3')], na.rm = TRUE)
+
+##Assign Values 
+    
+Pilot[Pilot$Ambivalence.State == "Q14",]$Ambivalence.State = 1
+Pilot[Pilot$Ambivalence.State == "Q13",]$Ambivalence.State = 0
+Pilot[Pilot$Power.State == "Q15",]$Power.State = 1
+Pilot[Pilot$Power.State == "Q16",]$Power.State = 0
+Pilot[Pilot$Education == "True",]$Education = 1
+Pilot[Pilot$Education == "False",]$Education = 0
+
+##Change IVs to factors instead of characters 
+Pilot$Ambivalence.State <- as.factor(Pilot$Ambivalence.State)
+Pilot$Power.State <- as.factor(Pilot$Power.State)
+
+##Exclusion criteria - folks within 6 median absolute deviation 
+
+Pilot.Median.Stats = Pilot %>%
+  summarize(Behavioral.Inaction.Num.M = median(Behavioral.Inaction.Num),
+            Behavioral.Inaction.Num.MAD = median(abs(Behavioral.Inaction.Num-Behavioral.Inaction.Num.M)))
+
+Pilot.Median.Stats
+
+Pilot_filtered = Pilot %>%
+  filter(abs(Behavioral.Inaction.Num-Pilot.Median.Stats$Behavioral.Inaction.Num.M) < 6 * Pilot.Median.Stats$Behavioral.Inaction.Num.MAD)
+
+```
 
 ### Confirmatory analysis
 
-################################################################################
-THIS STEP TO ONLY BE INCLUDED WITH ACTUAL DATA, NOT AS PART OF PILOT A. 
-
-
 1) Manipulation checks - Two way factorial design to assess whether variables other than intended one is responsible for differences, i.e. did reading ambivalent vs. univalent profiles determine ambivalence level or did other variable such as power impact it as well? This is to ensure that participants reading ambivalent scenarios are in fact becoming more ambivalent(?). 
 
+##Manipulation Checks 
 
-fit <- aov(y ~ A + B + A:B, data=mydataframe)
-fit <- aov(y ~ A*B, data=mydataframe) # same thing 
-################################################################################
+Code does not run because we don't have enough input yet. 
 
+MC <- aov(Subjective.Ambivalence ~ Power.State*Ambivalence.State, data = Pilot)
+summary(MC)
+
+##Analysis of interest
 2) Multivariate analysis of inaction - Two way factorial design to assess main effect of employee profile and significant interactions with power state 
 
 
 ```{r}
-fit1 <- manova(cbind(Verbal_Inaction, Behavioral.Inaction) ~ Power.State*Ambivalence_State, data = Pilot1New)
-summary(fit1)
+##MANOVA of Power state and ambivalence state as IVs and behavioral and verbal inaction as DVs
+
+Result <- manova(cbind(Verbal.Inaction.Num, Behavioral.Inaction.Num) ~ Power.State*Ambivalence.State, data = Pilot_filtered)
+summary(Result)
 
 ```
 
@@ -169,7 +225,12 @@ Note that the summary(fit1) function that should be after the above code doesn't
 
 ###Exploratory analyses
 
-Any follow-up analyses desired (not required).  
+```{r}
+##Check whether college edcation impacts interaction 
+
+Result1 <- manova(cbind(Verbal.Inaction.Num, Behavioral.Inaction.Num) ~ Power.State*Ambivalence.State*Education, data = Pilot_filtered)
+summary(Result1)
+```
 
 ## Discussion
 

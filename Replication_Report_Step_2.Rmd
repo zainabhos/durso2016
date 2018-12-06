@@ -115,36 +115,38 @@ You can comment this section out prior to final report with data collection.
 
 Data preparation following the analysis plan.
 	
-```{r include=F}
+
 ###Data Preparation
 
 *Data will be obtained through a Qualtrics link on Mechanical Turk 
 
 ####Load Relevant Libraries and Functions
 Not sure which to use? 
+
 ####Import data
 Will import data from Qualtrics .cvs
+
 #### Data exclusion / filtering
 Per original study, preliminary analysis will be conducted to exclude participants whose response time falls outside of 6 SDs. 
+
 #### Prepare data for analysis - create columns etc.
 Data cleaning and survey to ensure that missing data is excluded. Convert to wide vs. long format as necessary. Label variables appropriately. 
-```
 
 ### Confirmatory analysis
 
 1) Data exclusion - histograms, or create categorical variables with folks who score above and beyond a the +\-6 point. 
 2) Manipulation checks - Two way factorial design to assess whether variables other than intended one is responsible for differences, i.e. did reading ambivalent vs. univalent profiles determine ambivalence level or did other variable such as power impact it as well? This is to ensure that participants reading ambivalent scenarios are in fact becoming more ambivalent(?). 
 
-```{r}
+
 fit <- aov(y ~ A + B + A:B, data=mydataframe)
 fit <- aov(y ~ A*B, data=mydataframe) # same thing 
-```
+
 3) Multivariate analysis of inaction - Two way factorial design to assess main effect of employee profile and significant interactions with power state 
 
-```{r}
+
 fit <- aov(y ~ A + B + A:B, data=mydataframe)
 fit <- aov(y ~ A*B, data=mydataframe) # same thing 
-```
+
 
 *Side-by-side graph with original graph is ideal here*
 
