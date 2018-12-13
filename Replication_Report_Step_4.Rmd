@@ -19,6 +19,10 @@ I am interested in studying best practice approaches for designing and adapting 
 
 I also chose this experiment because I am interested in practicing the methodology that was used to analyze the results. While I have a theoretical understanding of the ANOVA test, I have seldom used it to analyze data firsthand. I hope to potentially use this approach in my own experimental designs in the future and would thus like to practice it using data from this replication study. 
 
+Informed by the original study, the independent variables (IVs) in my study will be ambivalence state (whether participants are made to feel ambivalent or univalent) and power state (whether participants feel powerful or not), and the dependent variable will be inaction, assessed through an objective measure (length of time participants take to make a decision) and subjective measure (length of time participants report needing to make a decision about Bob). 
+
+RQ: Is there a main effect of ambivalence state, i.e. ambivalence means taking more time to decide, and is this main effect significantly impacted by an interaction with power state, i.e. ambivalence state is qualified by power state? 
+
 To replicate this study, I will have to recruit 120 adults. Participants will randomly be assigned into 4 experimental groups using a 2x2 between-subject factorial design. That is, participants will be divided between an ambivalent vs. univalent x powerful vs. powerless group. Ambivalence vs. not will be measured through providing a case vignette through which Bob, a hypothetical employee, will be described with either all positive/ all negative attributes (univalent) or half positive half negative attributes. Participants will then be asked to choose whether they want to promote Bob. This measure of ambivalence is complemented by a measure of perceived power. Power will be measured by asking participants to respond to an ostensibly random essay question that purposefully inquires about a time they either felt powerful or powerless. This is a widely used measure of current perception of power. 
 Participants will respond to the ambivalent assessment followed by the power assessment. Subsequently, participants will be asked how much they would like to wait before making a decision, and then be prompted to make a decision regarding promoting Bob. As such, procedures include reading a case vignette, writing a short paragraph, and responding to two questions. 
 
@@ -31,13 +35,16 @@ http://journals.sagepub.com.stanford.idm.oclc.org/doi/pdf/10.1177/09567976166699
 ##Link to repository 
 https://github.com/zainabhos/durso2016
 
+##Link to paradigm 
+https://stanforduniversity.qualtrics.com/jfe/form/SV_cuSM6E8kngtp27P
+
 ##Methods
 
 ###Power Analysis
 
-The effect size for this study was calculated using the G*Power software. Because the original study used a MANOVA, the effect size was determined by taking the Pillai V value and determining the effect size ==> .0358
+The effect size for this study was calculated using the GPower software. Because the original study used a MANOVA, the effect size was determined by using the original study's data, accessed via the Open Science Framework (OSF.io). Using this data, the Pillai V. value for the interaction effect between ambivalence state (IV 1) and power state (IV 2) on the two measures of inaction (DV 1 and 2) was calculated as .0346, which allowed GPower to calculate an effect size based on the number of IVs and DVs. This effect size was determined to be .0358
 
-The original study notes that they aimed for 120 participants in order to stay within conventions of including 20-40 participants per cell in a 2x2 factorial design. In order to accomplish the effect size they saw, i.e. .0358, we need 274 participants for 80%, 358 for 90%, and 496 for 95% power. However, due to logistical limitations, this study will aim to recruit the original number of participants who took the study.
+The original study notes that they aimed for 120 participants in order to stay within conventions of including 20-40 participants per cell in a 2x2 factorial design. Due to the small effect size the authors found, i.e. .0358, we need 274 participants for 80%, 358 for 90%, and 496 for 95% power. However, due to logistical limitations, this study will aim to recruit the original number of participants who took the study.
 
 ###Planned Sample
 
@@ -82,10 +89,12 @@ insteading of reading both positive and negative attributes.
 
 ###Analysis Plan
 
-1) Data exclusion: participants who fall within 6 SDs of response time will be excluded
-2) Manipulation checks will be conducted to ensure that ambivalence and power are each measured only by their respective tests. This will be conducted through a 2x2 ANOVA to see whether factors other intended variables can predict differences. 
-3) Multivariate analysis of inaction: responses will be put into a 2x2 ANOVA to assess main effects and interactions effects of employee profile and power state 
-4) While not included in original study, I will look into education as a covariate  
+1) Data exclusion: participants who fall within 6 median absolute deviation from the median of response time will be excluded
+
+2) Manipulation checks will be conducted to ensure that ambivalence is only being invoked by whether participants read an ambivalent vs. univalent description of Bob and not other variables. As such, respondents will be instructed to respond to three questions measuring their ambivalence towards Bob. This will create a composite subjective meaasure of ambivalence. This subjective score will be introduced to a 2x2 (ambivalence vs. univalence) x (powerful vs. powerless) ANOVA to assess whether ambivalence state is in fact the only variable impacting participant responses to their subjective measure of ambivalence. 
+
+3) Multivariate analysis of inaction: responses will be put into a 2x2 MANOVA to assess main effects and interactions effects of employee profile (IV) and power state (IV) on the two measures of inaction (DVs). As such, the outcome of interest in the MANOVA is the interaction between the two IVs on the DVs.   
+4) While not included in original study, I will look into education as a covariate. To do so, I will inquire about participants' level of completed education to explore any potential significant differences between the original findings and our findings solely due to the differences in this demographic. This will be introduced to a 3X3 between subject factorial design, though due to our small power, even if an effect exists it will be highly unlikely that we will be able to pick it up.  
 
 Key analysis of interest will be a 2x2 between-subject factorial design - MANOVA
 
@@ -110,11 +119,6 @@ You can comment this section out prior to final report with data collection.
 
 ##Results
 
-##Data Preparation 
-
-Data preparation following the analysis plan.
-	
-
 ###Data Preparation
 
 ####Load Relevant Libraries and Functions
@@ -128,25 +132,25 @@ library(stringr)
 
 ####Import data
 ```{r}
-PilotB <- read.csv("/Users/Ikhlas/Desktop/Psych251/PilotBData.csv", stringsAsFactors=FALSE)
+PilotB <- read.csv("/Users/Ikhlas/Desktop/Psych251/durso2016/PilotBData.csv", stringsAsFactors=FALSE)
+
+##### Removing first two rows from Qualtrics-imported data 
 PilotB = PilotB[3:nrow(PilotB), ]
 ```
 
-```{r}
-
 #### Data exclusion / filtering
-
-##Include only relevant columns 
+```{r}
+#####Include only relevant columns 
 Pilot <- subset(PilotB, select = c(Finished, Q15, Q16, Q6, Q10, Q8_Last.Click, Q8_Page.Submit, Q17, Ambivalentvs.Univalent_DO, Highvs.LowPower_DO, Q18, Q21, Q23))
 
-##Include those who finished 
+#####Include those who finished 
 Pilot<-Pilot[!(Pilot$Finished=="False"),]
 
 
-##Recode NAs
+#####Recode NAs
 Pilot[Pilot==-99] <- NA
 
-##Rename Columns 
+#####Rename Columns 
 names(Pilot)[names(Pilot) == 'Q6'] <- 'Verbal.Inaction'
 names(Pilot)[names(Pilot) == 'Q10'] <- 'Promote.Decision'
 names(Pilot)[names(Pilot) == 'Q8_Page.Submit'] <- 'Behavioral.Inaction'
@@ -157,20 +161,20 @@ names(Pilot)[names(Pilot) == 'Q18'] <- 'MC1'
 names(Pilot)[names(Pilot) == 'Q21'] <- 'MC2'
 names(Pilot)[names(Pilot) == 'Q23'] <- 'MC3'
 
-## Variable cleaning - take the letters out of the variable values and change it to a numeric type
+##### Variable cleaning - take the letters out of the variable values and change it to a numeric type
 Pilot$Verbal.Inaction.Num = str_extract(Pilot$Verbal.Inaction, "[0-9]+")
 Pilot$Verbal.Inaction.Num <- as.numeric(Pilot$Verbal.Inaction.Num)
 Pilot$Behavioral.Inaction.Num <- as.numeric(Pilot$Behavioral.Inaction)
 
 
-##Create composite score for ambivalence manipulation check 
+#####Create composite score for ambivalence manipulation check 
 
 Pilot$MC1 <- as.integer(Pilot$MC1)
 Pilot$MC2 <- as.integer(Pilot$MC2)
 Pilot$MC3 <- as.integer(Pilot$MC3)
 Pilot$Subjective.Ambivalence<-rowMeans(Pilot[, c('MC1','MC2','MC3')], na.rm = TRUE)
 
-##Assign Values 
+#####Assign Values 
     
 Pilot[Pilot$Ambivalence.State == "Q14",]$Ambivalence.State = 1
 Pilot[Pilot$Ambivalence.State == "Q13",]$Ambivalence.State = 0
@@ -179,11 +183,11 @@ Pilot[Pilot$Power.State == "Q16",]$Power.State = 0
 Pilot[Pilot$Education == "True",]$Education = 1
 Pilot[Pilot$Education == "False",]$Education = 0
 
-##Change IVs to factors instead of characters 
+#####Change IVs to factors instead of characters 
 Pilot$Ambivalence.State <- as.factor(Pilot$Ambivalence.State)
 Pilot$Power.State <- as.factor(Pilot$Power.State)
 
-##Exclusion criteria - folks within 6 median absolute deviation 
+#####Exclusion criteria - folks within 6 median absolute deviation 
 
 Pilot.Median.Stats = Pilot %>%
   summarize(Behavioral.Inaction.Num.M = median(Behavioral.Inaction.Num),
@@ -200,33 +204,46 @@ Pilot_filtered = Pilot %>%
 
 1) Manipulation checks - Two way factorial design to assess whether variables other than intended one is responsible for differences, i.e. did reading ambivalent vs. univalent profiles determine ambivalence level or did other variable such as power impact it as well? This is to ensure that participants reading ambivalent scenarios are in fact becoming more ambivalent(?). 
 
-##Manipulation Checks 
+####Manipulation Checks 
 
 Code does not run because we don't have enough input yet. 
 
 MC <- aov(Subjective.Ambivalence ~ Power.State*Ambivalence.State, data = Pilot)
 summary(MC)
 
-##Analysis of interest
+####Analysis of interest
 2) Multivariate analysis of inaction - Two way factorial design to assess main effect of employee profile and significant interactions with power state 
 
 
 ```{r}
-##MANOVA of Power state and ambivalence state as IVs and behavioral and verbal inaction as DVs
+#####MANOVA of Power state and ambivalence state as IVs and behavioral and verbal inaction as DVs
 
 Result <- manova(cbind(Verbal.Inaction.Num, Behavioral.Inaction.Num) ~ Power.State*Ambivalence.State, data = Pilot_filtered)
 summary(Result)
 
+#####Figures
+
+p1 <- ggplot(Pilot_filtered, aes(x=Power.State, y=Behavioral.Inaction.Num), aes(fill = factor(Ambivalence.State))) +
+       ggtitle("Impact of Power Perception on Decision-Making") + geom_boxplot(aes(fill = factor(Ambivalence.State))) +  
+        guides(fill=guide_legend(title="Ambivalence State")) 
+p1
+
+p2 <- ggplot(Pilot_filtered, aes(x=Power.State, y=Verbal.Inaction.Num), aes(fill = factor(Ambivalence.State))) +
+       ggtitle("Impact of Power Perception on Decision-Making") + geom_boxplot(aes(fill = factor(Ambivalence.State))) +  
+        guides(fill=guide_legend(title="Ambivalence State"))
+p2
+
+
 ```
 
-Note that the summary(fit1) function that should be after the above code doesn't work now because we don't have enough observations. When I try to run it it gives me this eror messages: Error in summary.manova(fit1) : residuals have rank 1 < 2. Could there be another reasong for this error?
 
 *Side-by-side graph with original graph is ideal here*
 
 ###Exploratory analyses
 
+####Check whether college edcation impacts interaction 
+
 ```{r}
-##Check whether college edcation impacts interaction 
 
 Result1 <- manova(cbind(Verbal.Inaction.Num, Behavioral.Inaction.Num) ~ Power.State*Ambivalence.State*Education, data = Pilot_filtered)
 summary(Result1)
